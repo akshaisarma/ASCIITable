@@ -1,5 +1,5 @@
 assume cs:asciitable
-proj1 segment 'code'
+asciitable segment 'code'
 org 100h
 
 START:jmp RealStart
@@ -76,15 +76,15 @@ jmp KeyListen3; None of the above pressed
 
 Quit:
 call RestoreScreen
-int 20h 
+int 20h
 
 ;Procedure Section
 page1:
 call DrawFrame
-mov bx, 284 
+mov bx, 284
 mov cx, 4
 mov dx, 0
-L9:	
+L9:
 add bx, 38
 push bx
 push cx
@@ -100,14 +100,14 @@ mov cx, 21
 	inc dx
 	Loop L10
 pop cx
-pop bx	
+pop bx
 Loop L9
 ret
 
 page2:
 call DrawFrame
-mov bx, 284 
-mov cx, 4	
+mov bx, 284
+mov cx, 4
 mov dx, 84
 L11:
 add bx, 38
@@ -125,14 +125,14 @@ mov cx, 21
 	inc dx
 	Loop L12
 pop cx
-pop bx	
+pop bx
 Loop L11
 ret
 
 page3:
 call DrawFrame
-mov bx, 284 
-mov cx, 4	
+mov bx, 284
+mov cx, 4
 mov dx, 168
 L13:
 add bx, 38
@@ -156,7 +156,7 @@ ret
 
 page4:
 call DrawFrame
-mov bx, 284 
+mov bx, 284
 mov dx, 252
 add bx, 38
 push bx
@@ -171,7 +171,7 @@ pop bx
 add bx, 160
 inc dx
 Loop L15
-pop bx	
+pop bx
 ret
 
 PrintA:
@@ -179,7 +179,7 @@ PrintA:
 push cx
 mov cx,0
 mov ax,dx
-Lbl: cmp ax,100 
+Lbl: cmp ax,100
 jl P5
 sub ax,100
 inc cx
@@ -189,7 +189,7 @@ add cx,48; Char 0
 mov es:[bx], cl
 inc bx
 inc bx
-;Second Digit 
+;Second Digit
 mov cx, 0
 Lbl1: cmp ax, 10
 jl P6
@@ -227,12 +227,12 @@ inc bx
 ret
 
 
-SaveScreen: 
+SaveScreen:
 mov ax, 0b800h
 mov es, ax
 mov cx, 4000
 sub bx,bx
-L:mov al, es:[bx] 
+L:mov al, es:[bx]
 mov ScrBuff[bx],al
 inc bx
 Loop L
@@ -248,7 +248,7 @@ inc bx
 Loop L1
 ret
 
-RestoreScreen: 
+RestoreScreen:
 mov cx, 4000
 sub bx, bx
 L2: mov al,ScrBuff[bx]
@@ -272,7 +272,7 @@ call Hdraw
 mov bx, 76
 mov byte ptr es:[bx], 0CBh
 call Vdraw
-mov bx, 76		
+mov bx, 76
 call Hdraw
 mov bx, 114
 mov byte ptr es:[bx], 0CBh
@@ -340,7 +340,7 @@ mov byte ptr es:[bx], 0CDh
 Loop L5
 ret
 
-proj1 ends
+asciitable ends
 end START
 
 
